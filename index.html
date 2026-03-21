@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+
+    <!-- PWA / Add to Home Screen support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Weather">
+    <meta name="theme-color" content="#764ba2">
+    <link rel="manifest" href="manifest.json">
+    <!-- Fallback icon for iOS (place a 180x180 PNG named apple-touch-icon.png in your repo) -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
     <style>
         * {
@@ -11,21 +20,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
-        /* Scale the entire page container */
-        html {
-            zoom: 0.80;
-        }
-        
-        /* Alternative method using transform (uncomment if zoom doesn't work in some browsers) */
-        /*
-        body {
-            transform: scale(0.67);
-            transform-origin: top left;
-            width: 149.25%; 
-            height: 149.25%;
-        }
-        */
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
@@ -62,13 +56,15 @@
         /* Controls Bar */
         .controls-bar {
             display: flex;
-            gap: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
             align-items: center;
             margin-bottom: 30px;
         }
 
         .search-input {
-            flex: 1;
+            flex: 1 1 180px;
+            min-width: 0;
             padding: 12px 18px;
             font-size: 1rem;
             font-family: inherit;
@@ -584,12 +580,33 @@
         }
 
         @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem;
-            }
+            h1 { font-size: 1.8rem; }
+            .subtitle { font-size: 1rem; }
 
-            .subtitle {
-                font-size: 1rem;
+            body { padding: 12px; }
+
+            .controls-bar { gap: 6px; }
+
+            /* Search takes full width on its own row */
+            .search-input { flex: 1 1 100%; }
+
+            /* Sort buttons shrink text */
+            .sort-btn { padding: 10px 10px; font-size: 0.82rem; }
+
+            /* Other buttons shrink a bit */
+            .add-location-btn, .refresh-btn, .reset-btn, .save-btn {
+                padding: 10px 12px;
+                font-size: 0.88rem;
+            }
+        }
+
+        /* PWA / Safe area support for iPhone notch & home indicator */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            body {
+                padding-top: calc(20px + env(safe-area-inset-top));
+                padding-bottom: calc(20px + env(safe-area-inset-bottom));
+                padding-left: calc(20px + env(safe-area-inset-left));
+                padding-right: calc(20px + env(safe-area-inset-right));
             }
         }
     </style>

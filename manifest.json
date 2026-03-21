@@ -1,0 +1,17 @@
+{
+  "name": "Weather Dashboard",
+  "short_name": "Weather",
+  "description": "Real-time weather conditions for multiple locations",
+  "start_url": "/weather/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#764ba2",
+  "theme_color": "#764ba2",
+  "icons": [
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
